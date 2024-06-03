@@ -1,1 +1,60 @@
 /* Styling for views pages */
+*,
+*::before,
+*::after,
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  appearance: none;
+  text-decoration: none;
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}
+
+:root{
+	/* Global colors */
+	--main-bg-color: #F7F7F5;
+	--secondary-bg-color: #FFFFFF;
+	--text-color: #000000;
+	--accent-color: #E84340;
+	--secondary-accent-color: #F2D930;
+	--tertiary-accent-color: #5340E8;
+
+	/* Global fonts */
+	--content-text: 'Inter', sans serif;
+}
+
+@media (min-width: 520px) {}
+
+@media (min-width: 768px) {}
+
+@media (min-width: 1200px) {}
+
+@media (min-width: 1560px) {}
+
+/* Keyframes & Animations */
+
+@keyframes blur-in {
+	0%    { opacity: 0; }
+	50%   { opacity: 0.5; }
+	100%  { opacity: 1; }
+} 
+
+@keyframes fade-in {
+    from { opacity: 0; }
+  }
+
+@keyframes fade-out {
+	to { opacity: 0; }
+}
+
+  @keyframes slide-from-right {
+from { transform: translateX(30px); }
+}
+
+@keyframes slide-to-left {
+to { transform: translateX(-30px); }
+}
