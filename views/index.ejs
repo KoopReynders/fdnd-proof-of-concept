@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+<%- include('partials/nav') %>
+
+</head>
+<body>
+    <main>
+        <ul>
+            <% sites.forEach(site => { %>
+                <li><a href="/<%= site.title %>"><%= site.title %></a></li>
+            <% }) %>
+        </ul>
+    </main>
+
+<%- include('partials/footer') %>

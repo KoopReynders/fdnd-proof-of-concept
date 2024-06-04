@@ -1,11 +1,11 @@
 // Import the express npm package from the node_modules directory
-import express from 'express';
+import express, { response } from 'express';
 
 // Import the fetchJson function from the ./helpers directory
 import fetchJson from './helpers/fetch-json.js';
 
 // Define the base URLs for Redpers and Directus APIs
-const apiURL = '';
+const apiURL = 'https://fdnd-agency.directus.app/items/';
 
 // Create a new express app
 const app = express();
@@ -22,21 +22,55 @@ app.set('views', './views');
 // Use the 'public' directory for static resources
 app.use(express.static('public'));
 
+// Sites for now
+const sites = {
+	'Nieuwekijk': 11,
+	'Future Ready Design': 12
+}
+
 // GET route for the index page
 app.get('/', function (request, response) {
 
     // Fetch categories and posts concurrently
     Promise.all([
-        fetchJson(`${apiURL}`)
+        fetchJson(`${apiURL}/frd_site`)
     ])
     .then(([siteData]) => {
-
-        // Render index.ejs and pass the filtered data as 'posts' and 'categories' variables
-        response.render('index', { sites: siteData });
+        
+        // Render index.ejs and pass the siteData as sites
+        response.render("index.ejs", { sites: siteData.data });
     })
     .catch((error) => {
         console.error('Error fetching data:', error);
         response.status(500).send('Error fetching data');
+    });
+});
+
+// GET route for scans
+app.get("/:siteTitle/",function(req,res){
+
+    let siteTitle = req.params.siteTitle;
+    let siteID = sites[siteTitle]
+
+	Promise.all([
+		fetchJson(`${apiURL}/frd_site/${siteID}`),
+        fetchJson(`${apiURL}/frd_scans?filter[frd_site_id][_eq]=${siteID}`),
+	])
+    .then(([siteData, scanData]) => {
+
+        if (siteID === undefined) {
+            res.render("404.ejs")
+        } else {
+            res.render("details.ejs", {
+                site: siteData.data,
+                scans: scanData.data,
+            });
+        }
+    })
+    .catch((error) => {
+        // Handle error if fetching data fails
+        console.error("Error fetching data:", error);
+        res.status(404).send("Post not found");
     });
 });
 

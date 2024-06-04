@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+<%- include('partials/nav') %>
+
+</head>
+<body>
+    <main>
+        <h2>Scans voor <%- site.title %></h2>
+        <% scans.forEach(scan => { %>
+            <p><%= scan.title %></p>
+            <p><%= scan.description %></p>
+            <p><%= scan.score %></p>
+            <p><%= scan.date %></p>
+            <ul>
+                <% scan.result.forEach(item => { %>
+                    <li><%= item.title %>: <%= item.amount %></li>
+                <% }); %>
+            </ul>
+        <% }) %>
+    </main>
+
+<%- include('partials/footer') %>
