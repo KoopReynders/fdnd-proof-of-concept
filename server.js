@@ -23,10 +23,7 @@ app.set('views', './views');
 app.use(express.static('public'));
 
 // Sites for now
-const sites = {
-	'Nieuwekijk': 11,
-	'Future Ready Design': 12
-}
+const sites = {}
 
 // GET route for the index page
 app.get('/', function (request, response) {
@@ -36,7 +33,11 @@ app.get('/', function (request, response) {
         fetchJson(`${apiURL}/frd_site`)
     ])
     .then(([siteData]) => {
-        
+
+        siteData.data.forEach(site => {
+            sites[site.title] = site.id;
+        });
+
         // Render index.ejs and pass the siteData as sites
         response.render("index.ejs", { sites: siteData.data });
     })
