@@ -1,15 +1,23 @@
-<%- include('partials/header') %>
-<%- include('partials/nav') %>
+<%- include('partials/header', {head:'', title: site.title}); -%>
 
 </head>
 <body>
     <main>
-        <h2>Scans voor <%- site.title %></h2>
-        <% scans.forEach(scan => { %>
-            <p><%= scan.title %></p>
-            <p><%= scan.description %></p>
-            <p><%= scan.score %></p>
+        <h1><%- site.title %></h1>
+        <% scans.slice(0, 1).forEach(scan => { %> <!-- Added slice to test -->
             <p><%= scan.date %></p>
+            <p><%= scan.title %></p>
+            <section>
+                <p><%= scan.title %></p>
+                <p><%= scan.description %></p>
+                <p><%= scan.score %></p>
+            </section>
+            <section>
+                <h2>Soorten foutmeldingen</h2>
+            </section>
+            <section>
+                <h2>Toegankelijkheid</h2>
+            </section>
             <ul>
                 <% scan.result.forEach(item => { %>
                     <li><%= item.title %>: <%= item.amount %></li>

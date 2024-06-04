@@ -16,24 +16,44 @@ html {
 
 :root{
 	/* Global colors */
-	--main-bg-color: #F7F7F5;
+	--main-bg-color: #F0F0F0;
 	--secondary-bg-color: #FFFFFF;
-	--text-color: #000000;
-	--accent-color: #E84340;
-	--secondary-accent-color: #F2D930;
-	--tertiary-accent-color: #5340E8;
+	--text-color: #5D666A;
+	--secondary-text-color: #030229;
+	--tertiary-text-color: #87929F;
+	--icon-color: #0275FF;
+	--secondary-accent-color: #707B81;
+	--tertiary-accent-color: #81BAFF;
 
 	/* Global fonts */
-	--content-text: 'Inter', sans serif;
+	--content-text: 'Outfit', sans serif;
+
+	/* Sizes */
+	--title-size: 36px;
+	--small-title-size: 28px;
+	--score-size: 40px;
+	--text-size: 20px;
+	--small-text-size: 18px;
 }
 
-@media (min-width: 520px) {}
+body{
+	background-color: var(--main-bg-color);
+	font-family: var(--content-text);
+}
+
+/* Media queries */
+
+@media (max-width: 520px) {}
 
 @media (min-width: 768px) {}
 
 @media (min-width: 1200px) {}
 
 @media (min-width: 1560px) {}
+
+@media (prefers-reduced-motion: no-preference) {
+	@view-transition {}
+}
 
 /* Keyframes & Animations */
 
