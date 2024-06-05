@@ -58,7 +58,7 @@ section#information {
 }
 
 section#sidebar { 
-	grid-area: 1 / 4 / 15 / 5; 
+	grid-area: 3 / 4 / 15 / 5; 
 }
 
 section#score { 
@@ -84,6 +84,10 @@ section {
 	font-size: var(--text-color);
 	border-radius: 15px;
 	max-width: 900px;
+}
+
+section:first-of-type{
+	background-color: var(--main-bg-color);
 }
 
 /* Media queries */
