@@ -7,16 +7,35 @@ document.addEventListener('DOMContentLoaded', function () {
     function prevSlide() {
         const currentSlide = carousel.querySelector('.carousel-item.active');
         const prevSlide = currentSlide.previousElementSibling || carousel.lastElementChild;
+        if (!document.startViewTransition) {
+            currentSlide.classList.remove('active');
+            prevSlide.classList.add('active');
+            return;
+        }
+        
+        // With a transition:
+        document.startViewTransition(() => {
         currentSlide.classList.remove('active');
         prevSlide.classList.add('active');
+        });
     }
 
     // Function to handle click on next button
     function nextSlide() {
         const currentSlide = carousel.querySelector('.carousel-item.active');
         const nextSlide = currentSlide.nextElementSibling || carousel.firstElementChild;
+        if (!document.startViewTransition) {
+            currentSlide.classList.remove('active');
+            nextSlide.classList.add('active');
+            return;
+        }
+        
+        // With a transition:
+        document.startViewTransition(() => {
         currentSlide.classList.remove('active');
         nextSlide.classList.add('active');
+        });
+
     }
 
     // Attach click event listeners to previous buttons
