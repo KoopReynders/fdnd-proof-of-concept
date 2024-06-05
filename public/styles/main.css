@@ -84,6 +84,7 @@ section {
 	font-size: var(--text-color);
 	border-radius: 15px;
 	max-width: 900px;
+	padding: 20px;
 }
 
 section:first-of-type{
