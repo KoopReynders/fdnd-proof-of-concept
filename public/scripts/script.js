@@ -1,23 +1,31 @@
-// Scripts
-const items = document.querySelectorAll('.carousel-item');
-const carouselPrev = document.querySelectorAll('.carousel-btn.next')
-const carouselNext = document.querySelectorAll('.carousel-btn.next')
-let currentItem = 0;
+document.addEventListener('DOMContentLoaded', function () {
+    const carousel = document.querySelector('.carousel');
+    const prevBtns = document.querySelectorAll('.carousel-btn.prev');
+    const nextBtns = document.querySelectorAll('.carousel-btn.next');
 
-function showItem(index) {
-    items.forEach((item, i) => {
-        item.classList.toggle('active', i === index);
+    // Function to handle click on previous button
+    function prevSlide() {
+        const currentSlide = carousel.querySelector('.carousel-item.active');
+        const prevSlide = currentSlide.previousElementSibling || carousel.lastElementChild;
+        currentSlide.classList.remove('active');
+        prevSlide.classList.add('active');
+    }
+
+    // Function to handle click on next button
+    function nextSlide() {
+        const currentSlide = carousel.querySelector('.carousel-item.active');
+        const nextSlide = currentSlide.nextElementSibling || carousel.firstElementChild;
+        currentSlide.classList.remove('active');
+        nextSlide.classList.add('active');
+    }
+
+    // Attach click event listeners to previous buttons
+    prevBtns.forEach(function (btn) {
+        btn.addEventListener('click', prevSlide);
     });
-}
 
-carouselPrev.addEventListener('click', () => {
-    currentItem = (currentItem > 0) ? currentItem - 1 : items.length - 1;
-    showItem(currentItem);
+    // Attach click event listeners to next buttons
+    nextBtns.forEach(function (btn) {
+        btn.addEventListener('click', nextSlide);
+    });
 });
-
-carouselNext.addEventListener('click', () => {
-    currentItem = (currentItem + 1) % items.length;
-    showItem(currentItem);
-});
-
-showItem(currentItem);

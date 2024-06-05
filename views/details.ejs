@@ -1,5 +1,5 @@
 <%- include('partials/header', {head:'', title: site.title}); -%>
-<script src="/scripts/script.js"></script>
+<script src="../scripts/script.js"></script>
 </head>
 <body>
     <main>
@@ -18,7 +18,7 @@
                     <div class="carousel-item <% if (index === 0) { %>active<% } %>">
                         <section id="information">
                             <div>
-                                <h3>Scan title</h3>
+                                <h3><%- scan.title %></h3>
                                 <h1><%- site.title %></h1>
                             </div>
                             <div>
@@ -27,14 +27,13 @@
                                     <path d="M5 2L2.44163 4.46362C1.6456 5.23016 1.62213 6.49702 2.38922 7.29253L5 10" stroke="#5D666A" stroke-width="3" stroke-linecap="round"/>
                                     </svg>
                                 </button>
-                                <span>Scan date</span>
+                                <span><%- scan.date %></span>
                                 <button class="carousel-btn next" aria-label="Next scan">
                                     <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M2 10L4.55837 7.53638C5.3544 6.76984 5.37787 5.50298 4.61078 4.70747L2 2" stroke="#5D666A" stroke-width="3" stroke-linecap="round"/>
                                     </svg>
                                 </button>
                             </div>
-                            <p>Scan Date</p>
                         </section>
                         <section id="score">
                             <div>
