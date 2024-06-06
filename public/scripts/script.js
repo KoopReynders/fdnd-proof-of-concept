@@ -2,11 +2,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const carousel = document.querySelector('.carousel');
     const prevBtns = document.querySelectorAll('.carousel-btn.prev');
     const nextBtns = document.querySelectorAll('.carousel-btn.next');
+    let direction = 'unknown';
 
     // Function to handle click on previous button
     function prevSlide() {
         const currentSlide = carousel.querySelector('.carousel-item.active');
         const prevSlide = currentSlide.nextElementSibling;
+        direction = 'backwards';
         if (!prevSlide) {
             prevBtns.disabled = true;
         } else {
@@ -17,10 +19,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             
             // With a transition:
-            document.startViewTransition(() => {
-            currentSlide.classList.remove('active');
-            prevSlide.classList.add('active');
-            });
+           document.startViewTransition({
+            update: () => {
+                currentSlide.classList.remove('active');
+                prevSlide.classList.add('active');
+            },
+            types: [direction],
+        });
         }
     }
 
@@ -28,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function nextSlide() {
         const currentSlide = carousel.querySelector('.carousel-item.active');
         const nextSlide = currentSlide.previousElementSibling;
+        direction = 'forwards';
         if (!nextSlide) {
             nextBtns.disabled = true;
         } else {
@@ -38,10 +44,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             
             // With a transition:
-            document.startViewTransition(() => {
-            currentSlide.classList.remove('active');
-            nextSlide.classList.add('active');
-            });
+           document.startViewTransition({
+				update: () => {
+                    currentSlide.classList.remove('active');
+                    nextSlide.classList.add('active');
+				},
+				types: [direction],
+			});
         }
 
     }
