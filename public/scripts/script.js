@@ -6,35 +6,43 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to handle click on previous button
     function prevSlide() {
         const currentSlide = carousel.querySelector('.carousel-item.active');
-        const prevSlide = currentSlide.previousElementSibling || carousel.lastElementChild;
-        if (!document.startViewTransition) {
+        const prevSlide = currentSlide.nextElementSibling;
+        if (!prevSlide) {
+            prevBtns.disabled = true;
+        } else {
+            if (!document.startViewTransition) {
+                currentSlide.classList.remove('active');
+                prevSlide.classList.add('active');
+                return;
+            }
+            
+            // With a transition:
+            document.startViewTransition(() => {
             currentSlide.classList.remove('active');
             prevSlide.classList.add('active');
-            return;
+            });
         }
-        
-        // With a transition:
-        document.startViewTransition(() => {
-        currentSlide.classList.remove('active');
-        prevSlide.classList.add('active');
-        });
     }
 
     // Function to handle click on next button
     function nextSlide() {
         const currentSlide = carousel.querySelector('.carousel-item.active');
-        const nextSlide = currentSlide.nextElementSibling || carousel.firstElementChild;
-        if (!document.startViewTransition) {
+        const nextSlide = currentSlide.previousElementSibling;
+        if (!nextSlide) {
+            nextBtns.disabled = true;
+        } else {
+            if (!document.startViewTransition) {
+                currentSlide.classList.remove('active');
+                nextSlide.classList.add('active');
+                return;
+            }
+            
+            // With a transition:
+            document.startViewTransition(() => {
             currentSlide.classList.remove('active');
             nextSlide.classList.add('active');
-            return;
+            });
         }
-        
-        // With a transition:
-        document.startViewTransition(() => {
-        currentSlide.classList.remove('active');
-        nextSlide.classList.add('active');
-        });
 
     }
 
