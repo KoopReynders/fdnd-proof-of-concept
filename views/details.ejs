@@ -35,30 +35,32 @@
                                 </button>
                             </div>
                         </section>
-                        <section id="score">
-                            <div>
-                                <p><%= scan.title %></p>
-                                <p><%= scan.description %></p>
-                                <p><%= scan.score %></p>
-                            </div>
-                        </section>
-                        <section id="foutmeldingen">
-                            <h2>Soorten foutmeldingen</h2>
-                            <div>
-                                <!-- Add details of different types of errors here -->
-                            </div>
-                        </section>
-                        <section id="toegankelijkheid">
-                            <h2>Toegankelijkheid</h2>
-                            <div>
-                                <!-- Add accessibility details here -->
-                            </div>
-                        </section>
-                        <section id="sidebar">
-                            <% scan.result.forEach(item => { %>
-                                <article><%= item.title %>: <%= item.amount %></article>
-                            <% }); %>
-                        </section>
+                        <div class="grid-container">
+                            <section id="score">
+                                <div>
+                                    <p><%= scan.title %></p>
+                                    <p><%= scan.description %></p>
+                                    <p><%= scan.score %></p>
+                                </div>
+                            </section>
+                            <section id="foutmeldingen">
+                                <h2>Soorten foutmeldingen</h2>
+                                <div>
+                                    <!-- Add details of different types of errors here -->
+                                </div>
+                            </section>
+                            <section id="toegankelijkheid">
+                                <h2>Toegankelijkheid</h2>
+                                <div>
+                                    <!-- Add accessibility details here -->
+                                </div>
+                            </section>
+                            <section id="sidebar">
+                                <% scan.result.forEach(item => { %>
+                                    <article><%= item.title %>: <%= item.amount %></article>
+                                <% }); %>
+                            </section>
+                        </div>
                     </div>
                 <% }) %>
             </div>
