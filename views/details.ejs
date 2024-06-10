@@ -13,7 +13,6 @@
             <p>AccessDash vereist een minimale schermbreedte van 900px</p>      
         </div>
         <div class="carousel-container">
-            <div class="carousel">
                 <% scans.forEach((scan, index) => { %>
                     <div class="carousel-item <% if (index === 0) { %>active<% } %>">
                         <section id="information">
@@ -38,8 +37,8 @@
                         <div class="grid-container">
                             <section id="score">
                                 <div>
-                                    <p><%= scan.title %></p>
-                                    <p><%= scan.description %></p>
+                                    <h2><%= scan.title %></h2>
+                                    <p style="white-space: pre-wrap;"><%= scan.description %></p>
                                     <p><%= scan.score %></p>
                                 </div>
                             </section>
@@ -63,7 +62,6 @@
                         </div>
                     </div>
                 <% }) %>
-            </div>
         </div>
     </main>
 </body>

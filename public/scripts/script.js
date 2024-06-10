@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const carousel = document.querySelector('.carousel');
+    const carousel = document.querySelector('.carousel-container');
     const prevBtns = document.querySelectorAll('.carousel-btn.prev');
     const nextBtns = document.querySelectorAll('.carousel-btn.next');
     let direction = 'unknown';
