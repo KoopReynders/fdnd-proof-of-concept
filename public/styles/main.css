@@ -156,6 +156,37 @@ section#sidebar > article {
 	border-radius: 15px;
 }
 
+        /* Table styles */
+		canvas {
+			width: auto;
+			height: auto;
+		}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #f4f4f4;
+        }
+        
+        .currentScan {
+            background-color: #e0f7fa;
+            font-weight: bold;
+        }
+
+        /* Section styles */
+        h2 {
+            margin-bottom: 20px;
+        }
+
 /* Media queries */
 @media screen and (max-width: 1050px) {
 }

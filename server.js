@@ -24,6 +24,32 @@ app.use(express.static('public'));
 
 // Sites for now
 const sites = {}
+const months = [
+    "Januari", 
+    "Februari",
+    "Maart",
+    "April",
+    "Mei",
+    "Juni", 
+    "Juli",
+    "Augustus",
+    "September",
+    "Oktober",
+    "November",
+    "December"
+];
+
+function changeDate(data) {
+    data.forEach((scan) => {
+        let scanDate = scan.date;
+        const getDate = new Date(scanDate);
+        const getMonth = months[getDate.getMonth()];
+        const getYear = getDate.getFullYear();
+        const updatedDate = getMonth + " " + getYear;
+        scan.date = updatedDate;
+    });
+    return data;
+}
 
 // GET route for the index page
 app.get('/', function (request, response) {
@@ -62,9 +88,10 @@ app.get("/:siteTitle/",function(req,res){
         if (siteID === undefined) {
             res.render("404.ejs")
         } else {
+            scanData.data = changeDate(scanData.data);
             res.render("details.ejs", {
                 site: siteData.data,
-                scans: scanData.data,
+                scans: scanData.data
             });
         }
     })

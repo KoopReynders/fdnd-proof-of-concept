@@ -27,21 +27,7 @@
                                     <path d="M5 2L2.44163 4.46362C1.6456 5.23016 1.62213 6.49702 2.38922 7.29253L5 10" stroke="#5D666A" stroke-width="3" stroke-linecap="round"/>
                                     </svg>
                                 </button>
-                                <% 
-                                // Functie om de maand in het Nederlands te krijgen
-                                function getMaandNaam(dateString) {
-                                    const maanden = [
-                                    "Januari", "Februari", "Maart", "April", "Mei", "Juni", 
-                                    "Juli", "Augustus", "September", "Oktober", "November", "December"
-                                    ];
-                                    const date = new Date(dateString);
-                                    const maandNaam = maanden[date.getMonth()];
-                                    const jaar = date.getFullYear();
-                                    return maandNaam + " " + jaar;
-                                }
-                                %>
-
-                                <date class="carousel-btn"><%= getMaandNaam(scan.date) %></date>
+                                <date class="carousel-btn"><%= scan.date %></date>
                                 <button class="carousel-btn next" aria-label="Next scan">
                                     <svg viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M2 10L4.55837 7.53638C5.3544 6.76984 5.37787 5.50298 4.61078 4.70747L2 2" stroke="#5D666A" stroke-width="3" stroke-linecap="round"/>
@@ -59,16 +45,35 @@
                             </section>
                             <section id="foutmeldingen">
                                 <h2>Soorten foutmeldingen</h2>
-                                <div>
-                                    
-                                    <!-- Add details of different types of errors here -->
-                                </div>
+                                <table>
+                                    <tr>
+                                        <% scan.result.forEach(item => { %>
+                                            <th><%= item.title %></th>
+                                        <% }); %>
+                                    </tr>
+                                    <tr>
+                                        <% scan.result.forEach(item => { %>
+                                            <td><%= item.amount %></td>
+                                        <% }); %>
+                                        <td></td>
+                                    </tr>
+                                </table>
                             </section>
                             <section id="toegankelijkheid">
                                 <h2>Toegankelijkheid</h2>
-                                <div>
-                                    <!-- Add accessibility details here -->
-                                </div>
+                                <table>
+                                    <tr>
+                                        <% scans.forEach(item => { %>
+                                            <th><%= item.date %></th>
+                                        <% }); %>
+                                    </tr>
+                                    <tr>
+                                        <% scans.forEach(item => { %>
+                                            <td class="<%= item.date === scan.date ? 'currentScan' : '' %>"><%= item.score %></td>
+                                        <% }); %>
+                                        <td></td>
+                                    </tr>
+                                </table>
                             </section>
                             <section id="sidebar">
                                 <% scan.result.forEach(item => { %>
@@ -78,7 +83,6 @@
                         </div>
                     </div>
                 <% }) %>
-        </div>
     </main>
 </body>
 </html>
