@@ -43,6 +43,7 @@ body{
 	font-family: var(--content-text);
 }
 
+/* Carousel styling */
 .carousel-container {
     display: flex;
     align-items: center;
@@ -74,14 +75,27 @@ body{
 	border-radius: 2px;
 }
 
+.carousel-buttons {
+	display: flex;
+	gap: 20px;
+}
+
+.carousel-buttons date {
+	display: flex;
+	align-items: center;
+	padding: 0 10px 0 10px;
+}
+
 .carousel-btn svg{
 	width: 12px;
 	height: auto;
 }
 
-.carousel-btn.disabled {
+.carousel-btn:disabled {
 	background-color: var(--main-bg-color);
 }
+
+/* Section/Grid styling */
 
 div.carousel-item > .grid-container {
 	display: grid;
@@ -98,6 +112,7 @@ section#information {
     align-items: center;
     justify-content: space-between;
 	max-width: 1300px;
+	margin-bottom: 20px;
 }
 
 section#sidebar { 

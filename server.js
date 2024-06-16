@@ -81,7 +81,7 @@ app.get("/:siteTitle/",function(req,res){
 
 	Promise.all([
 		fetchJson(`${apiURL}/frd_site/${siteID}`),
-        fetchJson(`${apiURL}/frd_scans?sort=-date&filter[frd_site_id][_eq]=${siteID}`),
+        fetchJson(`${apiURL}/frd_scans?sort=date&filter[frd_site_id][_eq]=${siteID}`),
 	])
     .then(([siteData, scanData]) => {
 

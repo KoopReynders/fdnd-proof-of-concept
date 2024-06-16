@@ -1,67 +1,89 @@
 document.addEventListener('DOMContentLoaded', function () {
     const carousel = document.querySelector('.carousel-container');
-    const prevBtns = document.querySelectorAll('.carousel-btn.prev');
-    const nextBtns = document.querySelectorAll('.carousel-btn.next');
-    let direction = 'unknown';
+    const slides = document.querySelectorAll('.carousel-item');
+
+    // Function to update the state of buttons on all slides
+    function updateButtonStates() {
+        slides.forEach(slide => {
+            const prevBtn = slide.querySelector('.carousel-btn.prev');
+            const nextBtn = slide.querySelector('.carousel-btn.next');
+            const prevSlide = slide.previousElementSibling;
+            const nextSlide = slide.nextElementSibling;
+
+            if (prevBtn) {
+                prevBtn.disabled = !prevSlide;
+            }
+
+            if (nextBtn) {
+                nextBtn.disabled = !nextSlide;
+            }
+        });
+    }
 
     // Function to handle click on previous button
-    function prevSlide() {
-        const currentSlide = carousel.querySelector('.carousel-item.active');
-        const prevSlide = currentSlide.nextElementSibling;
-        direction = 'backwards';
-        if (!prevSlide) {
-            prevBtns.disabled = true;
-        } else {
+    function prevSlide(event) {
+        const currentSlide = event.target.closest('.carousel-item');
+        const prevSlide = currentSlide.previousElementSibling;
+
+        if (prevSlide) {
             if (!document.startViewTransition) {
                 currentSlide.classList.remove('active');
                 prevSlide.classList.add('active');
+                updateButtonStates();
                 return;
             }
-            
+
             // With a transition:
-           document.startViewTransition({
-            update: () => {
-                currentSlide.classList.remove('active');
-                prevSlide.classList.add('active');
-            },
-            types: [direction],
-        });
+            document.startViewTransition({
+                update: () => {
+                    currentSlide.classList.remove('active');
+                    prevSlide.classList.add('active');
+                },
+                types: ['backwards'],
+            }).then(() => updateButtonStates());
         }
     }
 
     // Function to handle click on next button
-    function nextSlide() {
-        const currentSlide = carousel.querySelector('.carousel-item.active');
-        const nextSlide = currentSlide.previousElementSibling;
-        direction = 'forwards';
-        if (!nextSlide) {
-            nextBtns.disabled = true;
-        } else {
+    function nextSlide(event) {
+        const currentSlide = event.target.closest('.carousel-item');
+        const nextSlide = currentSlide.nextElementSibling;
+
+        if (nextSlide) {
             if (!document.startViewTransition) {
                 currentSlide.classList.remove('active');
                 nextSlide.classList.add('active');
+                updateButtonStates();
                 return;
             }
-            
+
             // With a transition:
-           document.startViewTransition({
-				update: () => {
+            document.startViewTransition({
+                update: () => {
                     currentSlide.classList.remove('active');
                     nextSlide.classList.add('active');
-				},
-				types: [direction],
-			});
+                },
+                types: ['forwards'],
+            }).then(() => updateButtonStates());
         }
-
     }
 
     // Attach click event listeners to previous buttons
-    prevBtns.forEach(function (btn) {
-        btn.addEventListener('click', prevSlide);
+    slides.forEach(slide => {
+        const prevBtn = slide.querySelector('.carousel-btn.prev');
+        if (prevBtn) {
+            prevBtn.addEventListener('click', prevSlide);
+        }
     });
 
     // Attach click event listeners to next buttons
-    nextBtns.forEach(function (btn) {
-        btn.addEventListener('click', nextSlide);
+    slides.forEach(slide => {
+        const nextBtn = slide.querySelector('.carousel-btn.next');
+        if (nextBtn) {
+            nextBtn.addEventListener('click', nextSlide);
+        }
     });
+
+    // Initial update of button states for the first slide
+    updateButtonStates();
 });
